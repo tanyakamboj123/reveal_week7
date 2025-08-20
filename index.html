@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quarterly Earnings – Interactive RevealJS Deck</title>
+  <!-- Reveal.js core CSS & theme -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reveal.css" />
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/theme/black.css" id="theme" />
+  <!-- Code highlight styles -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/plugin/highlight/monokai.css" />
+  <style>
+    .footnote { font-size: 0.6em; opacity: .75; }
+    .tag { display:inline-block; padding:.25em .6em; border-radius:999px; border:1px solid #9aa0a6; font-size:.6em; margin-left:.4em; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title slide (HTML) -->
+      <section>
+        <h1>Quarterly Earnings Report</h1>
+        <p><strong>Technical Consultant</strong> · Major Financial Institution</p>
+        <p>
+          Contact: <a href="mailto:21f3000745@ds.study.iitm.ac.in">21f3000745@ds.study.iitm.ac.in</a>
+          <span class="tag">RevealJS</span><span class="tag">Fragments</span><span class="tag">Math</span><span class="tag">Code</span>
+        </p>
+        <p class="footnote">Use <kbd>Space</kbd> / <kbd>→</kbd> to advance; <kbd>S</kbd> for speaker notes.</p>
+        <aside class="notes">
+          Welcome the audience, set context: Q-over-Q and YTD performance, focus on revenue, NIM, credit cost, risk and guidance.
+        </aside>
+      </section>
+
+      <!-- Markdown slide deck (at least one slide in Markdown) -->
+      <section data-markdown>
+        <textarea data-template>
+# Financial Overview *(Markdown)*
+
+- **Revenue:** ₹X,XXX Cr <!-- .element: class="fragment" data-fragment-index="1" -->
+- **EBITDA:** ₹XXX Cr <!-- .element: class="fragment" data-fragment-index="2" -->
+- **PAT:** ₹XXX Cr <!-- .element: class="fragment" data-fragment-index="3" -->
+- **Guidance:** FY25 maintained <!-- .element: class="fragment" data-fragment-index="4" -->
+
+> _Speaker cue:_ call out one metric per fragment.
+
+---
+
+## Valuation Formulae *(Math)*
+
+**Net Present Value (NPV):**
+
+$$\text{NPV} = \sum_{t=0}^{T} \frac{CF_t}{(1+r)^t}$$
+
+**Return on Equity (ROE):**
+
+$$\text{ROE} = \frac{\text{Net Income}}{\text{Average Shareholders' Equity}}$$
+
+**Cost-to-Income:**
+
+$$\text{C/I} = \frac{\text{Operating Expense}}{\text{Operating Income}}$$
+
+---
+
+## Python Sample *(syntax highlighting + line focus)*
+
+```python [1-10|2-3|6-8]
+from math import pow
+
+def npv(rate, cashflows):
+    return sum(cf / pow(1+rate, t) for t, cf in enumerate(cashflows))
+
+r = 0.085
+cfs = [-1000, 320, 410, 520, 610]
+print('NPV:', round(npv(r, cfs), 2))
+```
+
+> _Note:_ line groups highlight progressively with fragments.
+        </textarea>
+      </section>
+
+      <!-- Fragments demo (HTML) -->
+      <section>
+        <h2>KPIs – Animated Build</h2>
+        <ul>
+          <li class="fragment fade-in-then-semi-out">Customer growth: <strong>+12%</strong></li>
+          <li class="fragment fade-in-then-semi-out">Net Interest Margin (NIM): <strong>3.9%</strong></li>
+          <li class="fragment grow">Cost-to-Income: <strong>46%</strong></li>
+        </ul>
+        <aside class="notes">Briefly explain each KPI as it appears. Pause for questions after the third bullet.</aside>
+      </section>
+
+      <!-- JavaScript code sample with inline line-highlighting control via Markdown fence hint -->
+      <section data-markdown>
+        <textarea data-template>
+## JavaScript Sample *(syntax highlighting + fragments)*
+
+```js [1-7|2,5]
+const cashflows = [-1000, 320, 410, 520, 610];
+const r = 0.08;
+const discounted = cashflows.map((cf, t) => cf / Math.pow(1 + r, t));
+const npv = discounted.reduce((a, b) => a + b, 0);
+console.log(`NPV: ${npv.toFixed(2)}`);
+```
+        </textarea>
+      </section>
+
+      <!-- Closing slide with notes -->
+      <section>
+        <h2>Q&A</h2>
+        <p>Deck & code hosted on GitHub Pages.</p>
+        <aside class="notes">Invite stakeholder questions; offer to deep-dive into segment reporting, risk, and guidance scenarios.</aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js core + plugins -->
+  <script src="https://unpkg.com/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/markdown/markdown.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/highlight/highlight.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/math/math.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+      highlight: { highlightOnLoad: true },
+      math: {
+        // Autoload KaTeX from CDN (JS & CSS)
+        katex: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist'
+      }
+    });
+  </script>
+</body>
+</html>
